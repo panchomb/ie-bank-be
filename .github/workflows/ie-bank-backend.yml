@@ -2,7 +2,7 @@ name: ie-bank-backend
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" , '*']
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
@@ -12,7 +12,7 @@ permissions:
   id-token: write
 
 env:
-  BACKEND_WEBAPP_DEV: panchomb-be-dev
+  BACKEND_WEBAPP_NAME: panchomb-be-${{ github.ref == 'refs/heads/main' && 'uat' || 'dev' }}
 
 jobs:
   build:
@@ -72,6 +72,6 @@ jobs:
       uses: azure/webapps-deploy@v2
       id: deploy-to-webapp
       with:
-        app-name: ${{ env.BACKEND_WEBAPP_DEV }}
+        app-name: ${{ env.BACKEND_WEBAPP_NAME }}
         package: .
     
