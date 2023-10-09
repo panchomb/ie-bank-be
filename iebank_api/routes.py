@@ -9,7 +9,7 @@ def hello_world():
 
 @app.route('/skull', methods=['GET'])
 def skull():
-    return 'Hi! This is the BACKEND SKULL! 💀 (from my machine)'
+    return 'Hi! This is the BACKEND SKULL! 💀 (from the development server)'
 
 
 @app.route('/accounts', methods=['POST'])
