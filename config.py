@@ -6,10 +6,12 @@ load_dotenv()
 class Config(object):
     SECRET_KEY = 'this-really-needs-to-be-changed'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    APPINSIGHTS_INSTRUMENTATIONKEY = os.getenv('APPINSIGHTS_INSTRUMENTATIONKEY')
 
 class LocalConfig(Config):
     basedir = os.path.abspath(os.path.dirname(__file__))
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir,'.db', 'local.db')
+    APPINSIGHTS_INSTRUMENTATIONKEY = os.getenv('APPINSIGHTS_INSTRUMENTATIONKEY')
     DEBUG = True
 
 class GithubCIConfig(Config):
@@ -23,6 +25,7 @@ class DevelopmentConfig(Config):
     dbhost=os.getenv('DBHOST'),
     dbname=os.getenv('DBNAME')
     )
+    APPINSIGHTS_INSTRUMENTATIONKEY = os.getenv('APPINSIGHTS_INSTRUMENTATIONKEY')
     DEBUG = True
 
 class ProductionConfig(Config):
@@ -32,4 +35,5 @@ class ProductionConfig(Config):
     dbhost=os.getenv('DBHOST'),
     dbname=os.getenv('DBNAME')
     )
+    APPINSIGHTS_INSTRUMENTATIONKEY = os.getenv('APPINSIGHTS_INSTRUMENTATIONKEY')
     DEBUG = False
